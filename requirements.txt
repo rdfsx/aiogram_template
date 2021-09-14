@@ -1,0 +1,2 @@
+environs~=9.3.3
+motor~=2.5.1
