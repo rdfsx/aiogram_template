@@ -4,6 +4,6 @@ from app.handlers.private import setup_private
 
 
 def setup_all_handlers(dp):
+    setup_errors(dp)
     setup_admin(dp)
     setup_private(dp)
-    setup_errors(dp)
