@@ -7,10 +7,6 @@ from app.keyboards.inline import CancelMarkup
 from app.states.admin_states import BroadcastAdmin
 
 
-async def admin_start(m: Message):
-    await m.reply("Hello, admin!")
-
-
 async def broadcast(m: Message):
     await BroadcastAdmin.BROADCAST.set()
     await m.answer('Введите сообщение, которое хотели бы отправить всем, кто есть в базе:',
@@ -23,7 +19,7 @@ async def cancel_broadcast(call: CallbackQuery, state: FSMContext):
     await call.message.answer('Отменено.')
 
 
-async def start_broadcast(m: Message, state: FSMContext, db: AsyncIOMotorDatabase):
+async def start_broadcasting(m: Message, state: FSMContext, db: AsyncIOMotorDatabase):
     chats = await db.Users.find().to_list()
     broadcaster = TextBroadcaster(chats=chats, text=m.html_text)
     await state.reset_state()

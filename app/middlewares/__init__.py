@@ -4,6 +4,7 @@ from aiogram.contrib.middlewares.logging import LoggingMiddleware
 
 from .data import DataMiddleware
 from .database import DatabaseMiddleware
+from .throttling import ThrottlingMiddleware
 
 
 def setup(dp: Dispatcher):
@@ -11,3 +12,4 @@ def setup(dp: Dispatcher):
     dp.setup_middleware(EnvironmentMiddleware())
     dp.setup_middleware(DatabaseMiddleware())
     dp.setup_middleware(DataMiddleware())
+    dp.setup_middleware(ThrottlingMiddleware())
