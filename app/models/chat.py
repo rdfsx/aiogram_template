@@ -5,8 +5,7 @@ from pydantic import BaseModel, Field
 
 
 class Chat(BaseModel):
-    id: ObjectId = Field(default_factory=ObjectId, alias="_id")
-    tg_id: int = Field(...)
+    id: int = Field(alias="_id")
     type: str = Field(...)
 
     class Config:
@@ -15,15 +14,13 @@ class Chat(BaseModel):
         json_encoders = {ObjectId: str}
         schema_extra = {
             "example": {
-                "tg_id": 1234567,
+                "_id": 123456789,
                 "type": "private",
             }
         }
 
 
 class ChatUpdate(BaseModel):
-    language: Optional[str]
-    tg_id: Optional[int]
     type: Optional[str]
 
     class Config:
@@ -31,7 +28,7 @@ class ChatUpdate(BaseModel):
         json_encoders = {ObjectId: str}
         schema_extra = {
             "example": {
-                "tg_id": 1234567,
+                "_id": 123456789,
                 "type": "private",
             }
         }

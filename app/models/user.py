@@ -5,8 +5,7 @@ from pydantic import BaseModel, Field
 
 
 class User(BaseModel):
-    id: ObjectId = Field(default_factory=ObjectId, alias="_id")
-    tg_id: int = Field(...)
+    id: int = Field(alias="_id")
     language: str = Field(default='en')
 
     class Config:
@@ -15,22 +14,21 @@ class User(BaseModel):
         json_encoders = {ObjectId: str}
         schema_extra = {
             "example": {
-                "tg_id": 1234567,
+                "id": 12345678,
                 "language": "en",
             }
         }
 
 
-class UpdateUser(BaseModel):
+class UserUpdate(BaseModel):
     language: Optional[str]
-    tg_id: Optional[int]
 
     class Config:
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
         schema_extra = {
             "example": {
-                "tg_id": 1234567,
+                "id": 12345678,
                 "language": "en",
             }
         }

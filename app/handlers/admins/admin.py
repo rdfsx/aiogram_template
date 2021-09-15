@@ -20,9 +20,12 @@ async def cancel_broadcast(call: CallbackQuery, state: FSMContext):
 
 
 async def start_broadcasting(m: Message, state: FSMContext, db: AsyncIOMotorDatabase):
-    chats = await db.Users.find().to_list()
-    broadcaster = TextBroadcaster(chats=chats, text=m.html_text)
+    chats = await db.User.find().to_list(None)
+    result = []
+    for chat in chats:
+        result.append(chat['id'])
+    broadcaster = TextBroadcaster(chats=result, text=m.html_text)
     await state.reset_state()
     await m.answer("Рассылка запущена.")
     await broadcaster.run()
-    await m.answer(f"Отправлено {len(broadcaster.get_successful())} сообщений.")
+    await m.answer(f"Отправлено {len(broadcaster._successful)} сообщений.")

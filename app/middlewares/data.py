@@ -15,10 +15,10 @@ class DataMiddleware(BaseMiddleware):
         chat_type = chat.type if chat else "private"
         db: AsyncIOMotorDatabase = data["db"]
 
-        if not (user := await db.User.find_one({"tg_id": user_id})):
-            await db.User.insert_one(user := User(tg_id=user_id, language=language).dict())
-        if not (chat := await db.Chat.find_one({"tg_id": chat_id})):
-            await db.Chat.insert_one(chat := Chat(tg_id=chat_id, type=chat_type).dict())
+        if not (user := await db.User.find_one({"id": user_id})):
+            await db.User.insert_one(user := User(id=user_id, language=language).dict())
+        if not (chat := await db.Chat.find_one({"id": chat_id})):
+            await db.Chat.insert_one(chat := Chat(id=chat_id, type=chat_type).dict())
 
         data["user"] = user
         data["chat"] = chat
