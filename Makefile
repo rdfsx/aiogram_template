@@ -29,7 +29,7 @@ install:
 
 .PHONY: run
 run:
-	$(python) -m bot
+	$(python) -m app
 
 .PHONY: update
 update:

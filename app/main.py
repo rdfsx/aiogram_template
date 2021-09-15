@@ -4,7 +4,7 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.mongo import MongoStorage
 from aiogram.utils.executor import start_polling
 
-from app import handlers, middlewares
+from app import handlers, middlewares, filters
 from app.config import Config
 from app.utils import logger
 from app.utils.startup_notify import notify_superusers
@@ -12,12 +12,13 @@ from app.utils.startup_notify import notify_superusers
 
 async def on_startup(dp):
     middlewares.setup(dp)
-    # Setup handlers
-    handlers.setup(dp)
+
+    filters.setup(dp)
+
+    handlers.setup_all_handlers(dp)
 
     logger.setup_logger()
 
-    # Notify superusers
     await notify_superusers(Config.admins)
 
 
