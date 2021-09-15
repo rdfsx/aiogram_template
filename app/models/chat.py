@@ -21,7 +21,7 @@ class Chat(BaseModel):
         }
 
 
-class UpdateChat(BaseModel):
+class ChatUpdate(BaseModel):
     language: Optional[str]
     tg_id: Optional[int]
     type: Optional[str]
