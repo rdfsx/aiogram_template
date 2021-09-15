@@ -1,6 +1,5 @@
 from typing import Optional
 
-from bson import ObjectId
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 
 from app.config import Config
