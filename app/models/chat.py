@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 
 
 class Chat(BaseModel):
-    id: int = Field(alias="_id")
+    id: int = Field(...)
     type: str = Field(...)
 
     class Config:

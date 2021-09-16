@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 
 
 class User(BaseModel):
-    id: int = Field(alias="_id")
+    id: int = Field(...)
     language: str = Field(default='en')
 
     class Config:
