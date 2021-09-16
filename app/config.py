@@ -10,7 +10,7 @@ class Config(NamedTuple):
     BOT_TOKEN = env.str('BOT_TOKEN')
     STATISTICS_TOKEN = env.str('STATISTICS_TOKEN')
 
-    admins = [
+    ADMINS = [
         env.str('ADMIN_ID')
     ]
 
@@ -23,4 +23,4 @@ class Config(NamedTuple):
 
     if MONGODB_USERNAME and MONGODB_PASSWORD:
         MONGODB_URI += f"{MONGODB_USERNAME}:{MONGODB_PASSWORD}@"
-    MONGODB_URI += f"{MONGODB_HOSTNAME}:{MONGODB_PORT}" if MONGODB_HOSTNAME else f"localhost:{MONGODB_PORT}"
+    MONGODB_URI += f"{MONGODB_HOSTNAME}:{MONGODB_PORT}"

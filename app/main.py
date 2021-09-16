@@ -7,7 +7,7 @@ from aiogram.utils.executor import start_polling
 from app import handlers, middlewares, filters
 from app.config import Config
 from app.utils import logger
-from app.utils.startup_notify import notify_superusers
+from app.utils.notifications.startup_notify import notify_superusers
 
 
 async def on_startup(dp):
@@ -19,7 +19,7 @@ async def on_startup(dp):
 
     logger.setup_logger()
 
-    await notify_superusers(Config.admins)
+    await notify_superusers(Config.ADMINS)
 
 
 async def on_shutdown(dp):

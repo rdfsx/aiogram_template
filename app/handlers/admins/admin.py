@@ -1,6 +1,6 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message, CallbackQuery
-from aiogram_broadcaster import TextBroadcaster
+from aiogram_broadcaster import MessageBroadcaster
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from app.keyboards.inline import CancelMarkup
@@ -24,7 +24,7 @@ async def start_broadcasting(m: Message, state: FSMContext, db: AsyncIOMotorData
     result = []
     for chat in chats:
         result.append(chat['id'])
-    broadcaster = TextBroadcaster(chats=result, text=m.html_text)
+    broadcaster = MessageBroadcaster(chats=result, message=m)
     await state.reset_state()
     await m.answer("Рассылка запущена.")
     await broadcaster.run()

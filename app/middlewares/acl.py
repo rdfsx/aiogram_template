@@ -5,10 +5,10 @@ from aiogram.dispatcher.middlewares import BaseMiddleware
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from app.models import Chat, User
-from app.utils.new_user_notify import notify_new_user
+from app.utils.notifications.new_notify import notify_new_user
 
 
-class DataMiddleware(BaseMiddleware):
+class ACLMiddleware(BaseMiddleware):
     @staticmethod
     async def setup_chat(data: dict, user: types.User, language: str, chat: Optional[types.Chat] = None):
         user_id = int(user.id)

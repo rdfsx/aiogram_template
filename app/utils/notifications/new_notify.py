@@ -18,7 +18,7 @@ async def notify_new_user(user: types.User) -> None:
     ]
     with suppress():
         photo = pics.photos[0][-1].file_id
-    for admin in Config.admins:
+    for admin in Config.ADMINS:
         if photo:
             await bot.send_photo(admin, photo=photo, caption=('\n'.join(txt)))
         else:

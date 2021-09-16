@@ -5,7 +5,6 @@ from aiogram_broadcaster import TextBroadcaster
 
 
 async def notify_superusers(chats: Union[List[int], List[str], int, str]):
-    # Generate chats
     chats = [
         {
             "chat_id": chat_id,
@@ -13,8 +12,6 @@ async def notify_superusers(chats: Union[List[int], List[str], int, str]):
         }
         for chat_id in chats
     ]
-
-    # Run broadcaster
     await TextBroadcaster(
         chats=chats,
         text=md.hbold("$mention, The bot is running!"),
