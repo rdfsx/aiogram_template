@@ -4,7 +4,7 @@ from aiogram.types import BotCommandScopeChat
 from app.config import Config
 
 
-async def set_default_commands(dp):
+async def set_commands(dp):
     await dp.bot.set_my_commands(
         [
             types.BotCommand("start", "Запустить бота"),
