@@ -8,6 +8,7 @@ from app import handlers, middlewares, filters
 from app.config import Config
 from app.utils import logger
 from app.utils.notifications.startup_notify import notify_superusers
+from app.utils.set_bot_commands import set_default_commands
 
 
 async def on_startup(dp):
@@ -20,6 +21,8 @@ async def on_startup(dp):
     logger.setup_logger()
 
     await notify_superusers(Config.ADMINS)
+
+    await set_default_commands(dp)
 
 
 async def on_shutdown(dp):
