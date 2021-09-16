@@ -1,3 +1,7 @@
+import asyncio
+import logging
+
+from aiogram import Bot
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message, CallbackQuery
 from aiogram_broadcaster import MessageBroadcaster
@@ -29,3 +33,23 @@ async def start_broadcasting(m: Message, state: FSMContext, db: AsyncIOMotorData
     await m.answer("Рассылка запущена.")
     await broadcaster.run()
     await m.answer(f"Отправлено {len(broadcaster._successful)} сообщений.")
+
+
+async def get_amount_users(m: Message, db: AsyncIOMotorDatabase):
+    amount = await db.User.count_documents({})
+    await m.answer(f"Количество пользователей в базе данных: {amount}")
+
+
+async def get_exists_users(m: Message, db: AsyncIOMotorDatabase):
+    bot = Bot.get_current()
+    users = await db.User.find().to_list(None)
+    count = 0
+    await m.answer("Начинаем подсчет...")
+    for user in users:
+        try:
+            if await bot.send_chat_action(user['id'], "typing"):
+                count += 1
+        except Exception as e:
+            logging.exception(e)
+        await asyncio.sleep(.05)
+    await m.answer(f"Активных пользователей: {count}")
