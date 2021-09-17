@@ -35,7 +35,7 @@ async def on_shutdown(dp):
 
 def main():
     bot = Bot(token=Config.BOT_TOKEN, parse_mode=types.ParseMode.HTML)
-    storage = MongoStorage()
+    storage = MongoStorage(host=Config.MONGODB_HOSTNAME)
     dp = Dispatcher(bot, storage=storage)
 
     start_polling(dp, on_startup=on_startup, on_shutdown=on_shutdown)
