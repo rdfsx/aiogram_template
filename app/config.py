@@ -8,7 +8,6 @@ class Config(NamedTuple):
     __env.read_env()
 
     BOT_TOKEN = __env.str('BOT_TOKEN')
-    STATISTICS_TOKEN = __env.str('STATISTICS_TOKEN')
 
     ADMINS = [
         __env.str('ADMIN_ID')
