@@ -1,4 +1,4 @@
-from contextlib import suppress
+import logging
 
 from aiogram import types, Bot
 from aiogram.utils.markdown import quote_html
@@ -16,8 +16,11 @@ async def notify_new_user(user: types.User) -> None:
         f'id: <a href="tg://user?id={user.id}">{user.id}</a>',
         f"username: @{user.username}",
     ]
-    with suppress():
+    try:
         photo = pics.photos[0][-1].file_id
+    except Exception as e:
+        logging.error(e)
+        photo = ''
     for admin in Config.ADMINS:
         if photo:
             await bot.send_photo(admin, photo=photo, caption=('\n'.join(txt)))
