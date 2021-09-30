@@ -2,6 +2,8 @@ import ssl
 
 from datetime import timedelta, datetime
 
+from app.config import load_config
+
 
 def get_ssl_context(webhook_cert: str, webhook_pkey: str):
     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
@@ -99,22 +101,17 @@ def certificates_cli():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", dest="config")
     parser.add_argument('-e', '--expire-days', type=int, default=3650, dest='expire_days', action='store')
-    config_file = os.getenv("BOT_CONFIG_FILE")
-    if not config_file:
-        config_file = DEFAULT_CONFIG_PATH
-
-    environment_variables = {"config": config_file}
 
     args = parser.parse_args()
     cli_arguments = {key: value for key, value in vars(args).items() if value}
-    arguments = ChainMap(cli_arguments, environment_variables)
+    arguments = ChainMap(cli_arguments)
 
-    config = parse_config(arguments["config"])
-    cert_path = config['webhook']['certificates']['public']
-    pkey_path = config['webhook']['certificates']['private']
+    config = load_config()
+    cert_path = config.webhook.public_cert
+    pkey_path = config.webhook.private_cert
 
     generate_selfsigned_cert(
-        hostname=config['webhook']['host'],
+        hostname=config.webhook,
         cert_path=cert_path,
         pkey_path=pkey_path,
         expire_days=arguments['expire_days']
@@ -124,8 +121,6 @@ def certificates_cli():
 if __name__ == '__main__':
     import argparse
     import os
-    from app.config import DEFAULT_CONFIG_PATH
-    from bot.utils.parse_config import parse_config
     from collections import ChainMap
     certificates_cli()
     print('Success')

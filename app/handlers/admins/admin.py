@@ -24,7 +24,7 @@ async def cancel_broadcast(call: CallbackQuery, state: FSMContext):
 
 
 async def start_broadcasting(m: Message, state: FSMContext, db: AsyncIOMotorDatabase):
-    chats = await db.User.find().to_list(None)
+    chats = await db.UserModel.find().to_list(None)
     result = []
     for chat in chats:
         result.append(chat['id'])
@@ -36,13 +36,13 @@ async def start_broadcasting(m: Message, state: FSMContext, db: AsyncIOMotorData
 
 
 async def get_amount_users(m: Message, db: AsyncIOMotorDatabase):
-    amount = await db.User.count_documents({})
+    amount = await db.UserModel.count_documents({})
     await m.answer(f"Количество пользователей в базе данных: {amount}")
 
 
 async def get_exists_users(m: Message, db: AsyncIOMotorDatabase):
     bot = Bot.get_current()
-    users = await db.User.find().to_list(None)
+    users = await db.UserModel.find().to_list(None)
     count = 0
     await m.answer("Начинаем подсчет...")
     for user in users:

@@ -4,7 +4,7 @@ from aiogram import types
 from aiogram.dispatcher.middlewares import BaseMiddleware
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
-from app.models import Chat, User
+from app.models import ChatModel, UserModel
 from app.utils.notifications.new_notify import notify_new_user
 
 
@@ -16,11 +16,11 @@ class ACLMiddleware(BaseMiddleware):
         chat_type = chat.type if chat else "private"
         db: AsyncIOMotorDatabase = data["db"]
 
-        if not (user_db := await db.User.find_one({"id": user_id})):
-            await db.User.insert_one(user_db := User(id=user_id, language=language).dict())
+        if not (user_db := await db.UserModel.find_one({"id": user_id})):
+            await db.UserModel.insert_one(user_db := UserModel(id=user_id, language=language).dict())
             await notify_new_user(user)
-        if not (chat_db := await db.Chat.find_one({"id": chat_id})):
-            await db.Chat.insert_one(chat_db := Chat(id=chat_id, type=chat_type).dict())
+        if not (chat_db := await db.ChatModel.find_one({"id": chat_id})):
+            await db.ChatModel.insert_one(chat_db := ChatModel(id=chat_id, type=chat_type).dict())
 
         data["user"] = user_db
         data["chat"] = chat_db

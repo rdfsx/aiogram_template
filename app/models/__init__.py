@@ -1,7 +1,7 @@
-from .chat import Chat
-from .user import User
+from .chatmodel import ChatModel
+from .usermodel import UserModel
 
 __all__ = (
-    "Chat",
-    "User",
+    "ChatModel",
+    "UserModel",
 )
