@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from environs import Env
 
 
-@dataclass(frozen=True)
+@dataclass
 class DbConfig:
     host: str
     password: str
@@ -12,13 +12,13 @@ class DbConfig:
     uri: str
 
 
-@dataclass(frozen=True)
+@dataclass
 class Bot:
     token: str
     admin_ids: list[int]
 
 
-@dataclass(frozen=True)
+@dataclass
 class Webhook:
     host: str
     port: int
@@ -28,18 +28,18 @@ class Webhook:
     private_cert: str
 
 
-@dataclass(frozen=True)
+@dataclass
 class WebApp:
     host: str
     port: int
 
 
-@dataclass(frozen=True)
+@dataclass
 class Miscellaneous:
     other_params: str = None
 
 
-@dataclass(frozen=True)
+@dataclass
 class Config:
     bot: Bot
     db: DbConfig
