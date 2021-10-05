@@ -14,9 +14,10 @@ async def set_commands(dp):
     for admin in Config.ADMINS:
         await dp.bot.set_my_commands(
             [
-                types.BotCommand("amount", "Количество пользователей в бд"),
-                types.BotCommand("exists_amount", "Количество живых пользователей"),
-                types.BotCommand("broadcast", "Рассылка по всем пользователям"),
+                types.BotCommand("amount", "Количество юзеров в бд"),
+                types.BotCommand("exists_amount", "Количество живых юзеров"),
+                types.BotCommand("broadcast", "Рассылка по всем юзерам"),
+                types.BotCommand("users_file", 'Записать юзеров в файл')
             ],
             BotCommandScopeChat(admin)
         )

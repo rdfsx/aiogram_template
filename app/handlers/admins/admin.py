@@ -1,8 +1,9 @@
 import asyncio
 import logging
 
+import aiofiles.os
 from aiogram.dispatcher import FSMContext
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import Message, CallbackQuery, InputFile
 from aiogram_broadcaster import MessageBroadcaster
 
 from app.keyboards.inline import CancelMarkup
@@ -41,11 +42,11 @@ async def get_amount_users(m: Message):
 
 
 async def get_exists_users(m: Message):
+    await m.answer("Начинаем подсчет...")
     bot = m.bot
     db = bot["db"]
     users = await db.UserModel.find().to_list(None)
     count = 0
-    await m.answer("Начинаем подсчет...")
     for user in users:
         try:
             if await bot.send_chat_action(user['id'], "typing"):
@@ -54,3 +55,17 @@ async def get_exists_users(m: Message):
             logging.exception(e)
         await asyncio.sleep(.05)
     await m.answer(f"Активных пользователей: {count}")
+
+
+async def write_users_to_file(m: Message):
+    await m.answer("Начинаем запись...")
+    bot = m.bot
+    db = bot["db"]
+    users = await db.UserModel.find().to_list(None)
+    filename = 'users.txt'
+    async with aiofiles.open(filename, mode='w') as f:
+        for user in users:
+            await f.write(f"{user['id']}\n")
+    await m.answer_document(InputFile(filename))
+    await aiofiles.os.remove(filename)
+
