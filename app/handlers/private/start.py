@@ -1,5 +1,7 @@
 from aiogram.types import Message
 
+from app.models import UserModel
 
-async def get_start_message(m: Message):
+
+async def get_start_message(m: Message, user: UserModel):
     await m.answer(f"Привет, {m.from_user.first_name}!")

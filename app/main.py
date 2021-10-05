@@ -7,7 +7,7 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from app import handlers, middlewares, filters
 from app.config import Config
-from app.models.motor_client import MongoClient
+from app.models.base import MongoClient
 from app.utils import logger
 from app.utils.notifications.startup_notify import notify_superusers
 from app.utils.set_bot_commands import set_commands

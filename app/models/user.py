@@ -4,7 +4,7 @@ from bson import ObjectId
 from pydantic import BaseModel, Field
 
 
-class User(BaseModel):
+class UserModel(BaseModel):
     id: int = Field(...)
     language: str = Field(default='en')
 
@@ -20,7 +20,7 @@ class User(BaseModel):
         }
 
 
-class UserUpdate(BaseModel):
+class UserUpdateModel(BaseModel):
     language: Optional[str]
 
     class Config:

@@ -4,7 +4,7 @@ from bson import ObjectId
 from pydantic import BaseModel, Field
 
 
-class Chat(BaseModel):
+class ChatModel(BaseModel):
     id: int = Field(...)
     type: str = Field(...)
 
@@ -20,7 +20,7 @@ class Chat(BaseModel):
         }
 
 
-class ChatUpdate(BaseModel):
+class ChatUpdateModel(BaseModel):
     type: Optional[str]
 
     class Config:
