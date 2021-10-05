@@ -1,5 +1,6 @@
 from aiogram.utils.callback_data import CallbackData
 
+from app.middlewares.i18n import I18nMiddleware
 from app.utils.markup_constructor import InlineMarkupConstructor
 
 
@@ -26,4 +27,15 @@ class CancelMarkup(InlineMarkupConstructor):
         actions = [
             {'text': 'Отмена', 'callback_data': 'cancel'},
         ]
+        return self.markup(actions, schema)
+
+
+class LanguageMarkup(InlineMarkupConstructor):
+    callback_data = CallbackData("lang", "value")
+
+    def get(self):
+        languages = I18nMiddleware.AVAILABLE_LANGUAGES
+        actions = [{'text': languages[lang].label, 'callback_data': self.callback_data.new(lang)} for lang in languages]
+        schema = [len(actions)]
+
         return self.markup(actions, schema)

@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import NamedTuple
 
 from environs import Env
@@ -8,6 +9,9 @@ class Config(NamedTuple):
     __env.read_env()
 
     BOT_TOKEN = __env.str('BOT_TOKEN')
+
+    BASE_DIR = Path(__name__).resolve().parent.parent
+    LOCALES_DIR = BASE_DIR / 'locales'
 
     ADMINS = [
         __env.str('ADMIN_ID')

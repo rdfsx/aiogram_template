@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field
 class UserModel(BaseModel):
     id: int = Field(...)
     language: str = Field(default='en')
+    set_language: str = Field(default='en')
     create_time: datetime = datetime.now()
     update_time: datetime = datetime.now()
 
@@ -19,6 +20,7 @@ class UserModel(BaseModel):
             "example": {
                 "id": 12345678,
                 "language": "en",
+                "set_language": "ru",
                 "create_time": datetime(2021, 10, 5, 13, 33, 29, 695694),
                 "update_time": datetime(2021, 10, 5, 13, 33, 29, 695694),
             }
@@ -27,6 +29,7 @@ class UserModel(BaseModel):
 
 class UserUpdateModel(BaseModel):
     language: Optional[str]
+    set_language: Optional[str]
     update_time: datetime = datetime.now()
 
     class Config:
@@ -36,6 +39,7 @@ class UserUpdateModel(BaseModel):
             "example": {
                 "id": 12345678,
                 "language": "en",
+                "set_language": "ru",
                 "create_time": datetime(2021, 10, 5, 13, 33, 29, 695694),
                 "update_time": datetime(2021, 10, 5, 13, 33, 29, 695694),
             }

@@ -3,6 +3,7 @@ from aiogram.contrib.middlewares.environment import EnvironmentMiddleware
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 
 from .acl import ACLMiddleware
+from .i18n import I18nMiddleware
 from .throttling import ThrottlingMiddleware
 
 
@@ -11,3 +12,4 @@ def setup(dp: Dispatcher):
     dp.setup_middleware(EnvironmentMiddleware())
     dp.setup_middleware(ACLMiddleware())
     dp.setup_middleware(ThrottlingMiddleware())
+    dp.setup_middleware(dp.bot['i18n'])

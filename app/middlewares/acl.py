@@ -25,6 +25,9 @@ class ACLMiddleware(BaseMiddleware):
         data["user"]: UserModel = UserModel.parse_obj(user_db)
         data["chat"]: ChatModel = ChatModel.parse_obj(chat_db)
 
+        data["db"]: AsyncIOMotorDatabase = db
+        data["_"] = chat.bot['i18n'].gettext
+
     async def on_pre_process_message(self, message: types.Message, data: dict):
         await self.setup_chat(data, message.from_user, message.from_user.language_code, message.chat)
 
