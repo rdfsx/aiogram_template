@@ -36,6 +36,6 @@ class LanguageMarkup(InlineMarkupConstructor):
     def get(self):
         languages = I18nMiddleware.AVAILABLE_LANGUAGES
         actions = [{'text': languages[lang].label, 'callback_data': self.callback_data.new(lang)} for lang in languages]
-        schema = [len(actions)]
+        schema = [1] * len(actions)
 
         return self.markup(actions, schema)
