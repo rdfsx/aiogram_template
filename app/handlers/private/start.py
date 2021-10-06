@@ -14,8 +14,8 @@ async def get_start_message(m: Message):
 async def set_user_language(query: CallbackQuery, db: AsyncIOMotorDatabase, callback_data: dict):
     await query.answer()
     language = callback_data.get('value')
-    update_user = UserUpdateModel(set_language=language).clear_dict
-    await db.UserModel.update_one({"id": query.from_user.id}, {"$set": update_user})
+    update_user = UserUpdateModel(set_language=language)
+    await db.UserModel.update_one({"id": query.from_user.id}, {"$set": update_user.dict(exclude_none=True)})
     _ = i18n = query.bot['i18n']
     i18n.ctx_locale.set(language)
     await query.message.answer(_("Привет! Это бот."))

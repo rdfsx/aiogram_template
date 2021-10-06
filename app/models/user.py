@@ -2,7 +2,8 @@ from datetime import datetime
 from typing import Optional
 
 from bson import ObjectId
-from pydantic import BaseModel, Field
+from pydantic import Field
+from pydantic.main import BaseModel
 
 
 class UserModel(BaseModel):
@@ -44,7 +45,3 @@ class UserUpdateModel(BaseModel):
                 "update_time": datetime(2021, 10, 5, 13, 33, 29, 695694),
             }
         }
-
-    @property
-    def clear_dict(self):
-        return {k: v for k, v in self.dict().items() if v is not None}
