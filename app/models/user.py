@@ -44,3 +44,7 @@ class UserUpdateModel(BaseModel):
                 "update_time": datetime(2021, 10, 5, 13, 33, 29, 695694),
             }
         }
+
+    @property
+    def clear_dict(self):
+        return {k: v for k, v in self.dict().items() if v is not None}

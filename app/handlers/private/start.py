@@ -11,10 +11,10 @@ async def get_start_message(m: Message):
                    "🇬🇧 Choose your language:", reply_markup=LanguageMarkup().get())
 
 
-async def set_user_language(query: CallbackQuery, db: AsyncIOMotorDatabase, callback_data: dict, user: UserModel):
+async def set_user_language(query: CallbackQuery, db: AsyncIOMotorDatabase, callback_data: dict):
     await query.answer()
     language = callback_data.get('value')
-    update_user = UserUpdateModel(language=user.language, set_language=language).dict()
+    update_user = UserUpdateModel(set_language=language).clear_dict
     await db.UserModel.update_one({"id": query.from_user.id}, {"$set": update_user})
     _ = i18n = query.bot['i18n']
     i18n.ctx_locale.set(language)
