@@ -35,11 +35,13 @@ class ThrottlingMiddleware(BaseMiddleware):
         msg = target.message if isinstance(target, types.CallbackQuery) else target
         delta = throttled.rate - throttled.delta
 
+        _ = i18n = msg.bot["i18n"]
+
         if throttled.exceeded_count == 2:
-            await msg.reply('Слишком Часто! Давай не так быстро')
+            await msg.reply(_('Слишком Часто! Давай не так быстро'))
             return
         elif throttled.exceeded_count == 3:
-            await msg.reply(f'Всё. Больше не отвечу, пока не пройдет {round(delta, 3)} секунд')
+            await msg.reply(_('Всё. Больше не отвечу, пока не пройдет {time} секунд').format(time=round(delta, 3)))
             return
         await asyncio.sleep(delta)
 
