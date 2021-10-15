@@ -4,7 +4,6 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.mongo import MongoStorage
 from aiogram.utils.executor import start_polling
 from motor.motor_asyncio import AsyncIOMotorClient
-from odmantic import AIOEngine
 
 from app import handlers, middlewares, filters
 from app.config import Config
