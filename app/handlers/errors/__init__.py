@@ -1,7 +1,10 @@
+import importlib
+import os
+
 from aiogram import Dispatcher
 
-from app.handlers.errors.error_handler import errors_handler
 
-
-def setup_errors(dp: Dispatcher):
-    dp.register_errors_handler(errors_handler)
+def setup(dp: Dispatcher, directory: str):
+    for module in os.listdir(os.path.dirname(__file__)):
+        if module not in ['__init__.py', '__pycache__']:
+            (importlib.import_module(f"app.handlers.{directory}.{module}".replace(".py", ''))).setup(dp)

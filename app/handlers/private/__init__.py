@@ -1,11 +1,10 @@
+import importlib
+import os
+
 from aiogram import Dispatcher
 
-from app.handlers.private.default import get_default_message
-from app.handlers.private.help import get_help_message
-from app.handlers.private.start import get_start_message
 
-
-def setup_private(dp: Dispatcher):
-    dp.register_message_handler(get_start_message, commands="start")
-    dp.register_message_handler(get_help_message, commands="help")
-    dp.register_message_handler(get_default_message)
+def setup(dp: Dispatcher, directory: str):
+    for module in os.listdir(os.path.dirname(__file__)):
+        if module not in ['__init__.py', '__pycache__']:
+            (importlib.import_module(f"app.handlers.{directory}.{module}".replace(".py", ''))).setup(dp)

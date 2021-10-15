@@ -1,43 +1,22 @@
+import json
 from datetime import datetime
-from typing import Optional
+from enum import Enum
 
-from bson import ObjectId
-from pydantic import Field
-from pydantic.main import BaseModel
+from odmantic import Field, Model
 
 
-class UserModel(BaseModel):
-    id: int = Field(...)
-    language: str = Field(default='en')
-    create_time: datetime = datetime.now()
-    update_time: datetime = datetime.now()
-
-    class Config:
-        allow_population_by_field_name = True
-        arbitrary_types_allowed = True
-        json_encoders = {ObjectId: str}
-        schema_extra = {
-            "example": {
-                "id": 12345678,
-                "language": "en",
-                "create_time": datetime(2021, 10, 5, 13, 33, 29, 695694),
-                "update_time": datetime(2021, 10, 5, 13, 33, 29, 695694),
-            }
-        }
+class UserRoles(str, Enum):
+    new = 'new'
+    user = 'user'
+    admin = 'admin'
 
 
-class UserUpdateModel(BaseModel):
-    language: Optional[str]
-    update_time: datetime = datetime.now()
+class UserModel(Model):
+    id: int = Field(primary_field=True)
+    language: str = 'en'
+    role: UserRoles = Field(default=UserRoles.new)
+    created_at: datetime = Field(default_factory=datetime.now)
 
     class Config:
-        arbitrary_types_allowed = True
-        json_encoders = {ObjectId: str}
-        schema_extra = {
-            "example": {
-                "id": 12345678,
-                "language": "en",
-                "create_time": datetime(2021, 10, 5, 13, 33, 29, 695694),
-                "update_time": datetime(2021, 10, 5, 13, 33, 29, 695694),
-            }
-        }
+        collection = "Users"
+        json_loads = json.loads

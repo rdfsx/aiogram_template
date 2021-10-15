@@ -243,17 +243,17 @@ python-versions = "*"
 
 [[package]]
 name = "motor"
-version = "2.5.1"
+version = "2.4.0"
 description = "Non-blocking MongoDB driver for Tornado or asyncio"
 category = "main"
 optional = false
 python-versions = ">=3.5.2"
 
 [package.dependencies]
-pymongo = ">=3.12,<4"
+pymongo = ">=3.11,<4"
 
 [package.extras]
-encryption = ["pymongo[encryption] (>=3.12,<4)"]
+encryption = ["pymongo[encryption] (>=3.11,<4)"]
 
 [[package]]
 name = "multidict"
@@ -270,6 +270,28 @@ description = "Experimental type system extensions for programs checked with the
 category = "dev"
 optional = false
 python-versions = "*"
+
+[[package]]
+name = "odmantic"
+version = "0.3.5"
+description = "ODMantic, an AsyncIO MongoDB Object Document Mapper for Python using type hints "
+category = "main"
+optional = false
+python-versions = ">=3.6,<4.0"
+develop = false
+
+[package.dependencies]
+motor = ">=2.1.0,<2.5.0"
+pydantic = ">=1.6.2,!=1.7,!=1.7.1,!=1.7.2,!=1.7.3,!=1.8,!=1.8.1,<1.9.0"
+
+[package.extras]
+fastapi = ["fastapi (>=0.61.1,<0.67.0)"]
+
+[package.source]
+type = "git"
+url = "https://github.com/art049/odmantic.git"
+reference = "master"
+resolved_reference = "f20f08f8ab1768534c1e743f7539bfe4f8c73bdd"
 
 [[package]]
 name = "pathspec"
@@ -405,7 +427,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "7e475206d4e613020a2fad6d2ff3731b07b50e7ea128364c17ddd500e797b9c7"
+content-hash = "2a0a04c662ec04b737925cfced69d515b3329e44380c00b5f30abdf4c6310308"
 
 [metadata.files]
 aiofiles = [
@@ -523,8 +545,8 @@ mccabe = [
     {file = "mccabe-0.6.1.tar.gz", hash = "sha256:dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f"},
 ]
 motor = [
-    {file = "motor-2.5.1-py3-none-any.whl", hash = "sha256:961fdceacaae2c7236c939166f66415be81be8bbb762da528386738de3a0f509"},
-    {file = "motor-2.5.1.tar.gz", hash = "sha256:663473f4498f955d35db7b6f25651cb165514c247136f368b84419cb7635f6b8"},
+    {file = "motor-2.4.0-py3-none-any.whl", hash = "sha256:839c11a43897dbec8e5ba0e87a9c9b877239803126877b2efa5cef89aa6b687a"},
+    {file = "motor-2.4.0.tar.gz", hash = "sha256:1196db507142ef8f00d953efa2f37b39335ef2d72af6ce4fbccfd870b65c5e9f"},
 ]
 multidict = [
     {file = "multidict-5.1.0-cp36-cp36m-macosx_10_14_x86_64.whl", hash = "sha256:b7993704f1a4b204e71debe6095150d43b2ee6150fa4f44d6d966ec356a8d61f"},
@@ -569,6 +591,7 @@ mypy-extensions = [
     {file = "mypy_extensions-0.4.3-py2.py3-none-any.whl", hash = "sha256:090fedd75945a69ae91ce1303b5824f428daf5a028d2f6ab8a299250a846f15d"},
     {file = "mypy_extensions-0.4.3.tar.gz", hash = "sha256:2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"},
 ]
+odmantic = []
 pathspec = [
     {file = "pathspec-0.9.0-py2.py3-none-any.whl", hash = "sha256:7d15c4ddb0b5c802d161efc417ec1a2558ea2653c2e8ad9c19098201dc1c993a"},
     {file = "pathspec-0.9.0.tar.gz", hash = "sha256:e564499435a2673d586f6b2130bb5b95f04a3ba06f81b8f895b651a3c76aabb1"},

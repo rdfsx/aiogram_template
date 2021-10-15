@@ -1,9 +1,10 @@
-from app.handlers.admins import setup_admin
-from app.handlers.errors import setup_errors
-from app.handlers.private import setup_private
+import importlib
+import os
+
+from aiogram import Dispatcher
 
 
-def setup_all_handlers(dp):
-    setup_errors(dp)
-    setup_admin(dp)
-    setup_private(dp)
+def setup_all_handlers(dp: Dispatcher):
+    for module in os.listdir(os.path.dirname(__file__)):
+        if module not in ['__init__.py', '__pycache__']:
+            (importlib.import_module(f"app.handlers.{module}")).setup(dp, module)

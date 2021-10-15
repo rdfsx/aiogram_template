@@ -16,9 +16,9 @@ aiogram = "^2.12"
 loguru = "^0.5.3"
 aiogram-broadcaster = "^0"
 pydantic = "^1.8.2"
-motor = "^2.5.1"
 environs = "^9.3.3"
 aiofiles = "^0.7.0"
+odmantic = {git = "https://github.com/art049/odmantic.git"}
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"
