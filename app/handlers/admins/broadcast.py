@@ -4,7 +4,7 @@ from aiogram.types import Message, CallbackQuery
 from aiogram_broadcaster import MessageBroadcaster
 from odmantic import AIOEngine
 
-from app.keyboards.inline import CancelMarkup
+from app.keyboards.inline import CancelKb
 from app.models import UserModel
 from app.states.admin_states import BroadcastAdmin
 
@@ -12,7 +12,7 @@ from app.states.admin_states import BroadcastAdmin
 async def start_broadcast(m: Message):
     await BroadcastAdmin.BROADCAST.set()
     await m.answer('Введите сообщение, которое хотели бы отправить всем, кто есть в базе:',
-                   reply_markup=CancelMarkup().get())
+                   reply_markup=CancelKb().get())
 
 
 async def cancel_broadcast(call: CallbackQuery, state: FSMContext):

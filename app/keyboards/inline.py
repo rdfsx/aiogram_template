@@ -3,7 +3,7 @@ from aiogram.utils.callback_data import CallbackData
 from app.utils.markup_constructor import InlineMarkupConstructor
 
 
-class ExampleInlineMarkup(InlineMarkupConstructor):
+class ExampleInlineKb(InlineMarkupConstructor):
     callback_data = CallbackData('test', 'number')
 
     def get(self):
@@ -19,11 +19,26 @@ class ExampleInlineMarkup(InlineMarkupConstructor):
         return self.markup(actions, schema)
 
 
-class CancelMarkup(InlineMarkupConstructor):
+class CancelKb(InlineMarkupConstructor):
 
     def get(self):
         schema = [1]
         actions = [
-            {'text': 'Отмена', 'callback_data': 'cancel'},
+            {'text': 'Отмена', 'cb': 'cancel'},
         ]
+        return self.markup(actions, schema)
+
+
+class AdminShowsSettingsKb(InlineMarkupConstructor):
+    add_shows = "add_shows"
+    delete_shows = "delete_shows"
+    display_shows = "display_shows"
+
+    def get(self):
+        actions = [
+            {'text': "Добавить текст для показов", 'cb': self.add_shows},
+            {'text': "Удалить текст для показов", 'cd': self.delete_shows},
+            {'text': "Вывести текст для показов", 'cb': self.display_shows}
+        ]
+        schema = [2, 1]
         return self.markup(actions, schema)

@@ -7,3 +7,20 @@ class AnswerAdmin(StatesGroup):
 
 class BroadcastAdmin(StatesGroup):
     BROADCAST = State()
+
+
+class RefSearchAdmin(StatesGroup):
+    SEARCH = State()
+
+
+class AdminRef(StatesGroup):
+    SET = State()
+
+
+class AdminShows(StatesGroup):
+    SHOWS = State()
+
+
+class AdminSubscription(StatesGroup):
+    SUB = State()
+    LINK = State()
