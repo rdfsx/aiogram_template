@@ -1,3 +1,4 @@
+from .channel_admin import ChannelModel
 from .chat import ChatModel
 from .ref_admin import RefAdminModel
 from .shows import ShowsModel
@@ -9,4 +10,5 @@ __all__ = (
     "UserRoles",
     "RefAdminModel",
     "ShowsModel",
+    "ChannelModel",
 )

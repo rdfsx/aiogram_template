@@ -10,5 +10,5 @@ class AdminFilter(BoundFilter):
     def __init__(self, is_admin):
         self.is_admin = is_admin
 
-    async def check(self, message: types.Message):
-        return str(message.from_user.id) in Config.ADMINS
+    async def check(self, m: types.Message):
+        return str(m.from_user.id) in Config.ADMINS

@@ -1,5 +1,8 @@
+from typing import List
+
 from aiogram.utils.callback_data import CallbackData
 
+from app.models import ChannelModel
 from app.utils.markup_constructor import InlineMarkupConstructor
 
 
@@ -41,4 +44,26 @@ class AdminShowsSettingsKb(InlineMarkupConstructor):
             {'text': "Вывести текст для показов", 'cb': self.display_shows}
         ]
         schema = [2, 1]
+        return self.markup(actions, schema)
+
+
+class AdminChannelsListKb(InlineMarkupConstructor):
+    callback_data = CallbackData("channel", "channel_id")
+
+    def get(self, channel_list: List[ChannelModel]):
+        actions = []
+        for channel in channel_list:
+            actions.append({'text': f"{channel.title}", 'cb': self.callback_data.new(channel.id)})
+        schema = [1] * len(channel_list)
+        return self.markup(actions, schema)
+
+
+class AdminDeleteChannelKb(InlineMarkupConstructor):
+    callback_data = CallbackData("delete_channel", "channel_id")
+
+    def get(self, channel_id: str):
+        actions = [
+            {'text': "Удалить канал.", 'cb': self.callback_data.new(channel_id)}
+        ]
+        schema = [1]
         return self.markup(actions, schema)
