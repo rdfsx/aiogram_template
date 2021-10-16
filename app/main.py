@@ -40,7 +40,10 @@ async def on_shutdown(dp):
 
 def main():
     bot = Bot(token=Config.BOT_TOKEN, parse_mode=types.ParseMode.HTML)
-    storage = MongoStorage(host=Config.MONGODB_HOSTNAME, db_name="aiogram_bot_template_fsm")
+    storage = MongoStorage(host=Config.MONGODB_HOSTNAME,
+                           db_name=f"{Config.MONGODB_DATABASE}_fsm",
+                           password=Config.MONGODB_PASSWORD,
+                           uri=Config.MONGODB_URI)
     dp = Dispatcher(bot, storage=storage)
 
     start_polling(dp, on_startup=on_startup, on_shutdown=on_shutdown)

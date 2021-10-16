@@ -6,7 +6,7 @@ from app.models import UserModel
 
 
 async def get_default_message(m: Message, user: UserModel, db: AIOEngine):
-    await m.answer("Привет.")
+    await m.answer(m.text)
 
 
 def setup(dp: Dispatcher):

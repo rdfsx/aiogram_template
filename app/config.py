@@ -9,9 +9,7 @@ class Config(NamedTuple):
 
     BOT_TOKEN = __env.str('BOT_TOKEN')
 
-    ADMINS = [
-        __env.str('ADMIN_ID')
-    ]
+    ADMINS = __env.list('ADMIN_ID')
 
     MONGODB_DATABASE = __env.str('MONGODB_DATABASE')
     MONGODB_USERNAME = __env.str('MONGODB_USERNAME')
