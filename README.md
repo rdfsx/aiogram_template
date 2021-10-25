@@ -6,7 +6,8 @@ A template for creating bots as quickly as possible. Written on [aiogram](https:
 ### Setting up
 
 #### Preparations
-- Make sure Git and docker-compose are installed `apt-get update && apt-get install git docker-compose -y;`
+- Update package lists `sudo apt-get update`;
+- Make sure Git and docker-compose are installed `apt-get install git docker-compose -y`;
 - Clone this repo via `git clone https://github.com/rdfsx/bot_template`;
 - Move to the directory `cd bot_template`.
 
