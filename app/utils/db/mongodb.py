@@ -7,6 +7,7 @@ from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from odmantic import AIOEngine
 
 from app.config import Config
+from app.utils.db.my_engine import MyAIOEngine
 
 
 class MyMongoClient:
@@ -59,5 +60,5 @@ class MyODManticMongo(MyMongoClient):
 
     def get_engine(self) -> AIOEngine:
         if not self._engine:
-            self._engine = AIOEngine(motor_client=self.get_client(), database=Config.MONGODB_DATABASE)
+            self._engine = MyAIOEngine(motor_client=self.get_client(), database=Config.MONGODB_DATABASE)
         return self._engine
