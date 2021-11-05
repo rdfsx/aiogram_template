@@ -5,7 +5,7 @@ from aiogram.contrib.fsm_storage.mongo import MongoStorage
 from aiogram.utils.executor import start_polling
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from app import handlers, middlewares, filters
+from app import filters, handlers, middlewares
 from app.config import Config
 from app.utils import logger
 from app.utils.db import MyODManticMongo
@@ -32,7 +32,7 @@ async def on_shutdown(dp):
     await dp.bot.session.close()
     await dp.storage.close()
     await dp.storage.wait_closed()
-    if mongo := dp.bot.get('mongo', None):
+    if mongo := dp.bot.get("mongo", None):
         await mongo.close()
         await mongo.wait_closed()
     logging.warning("Bye!")
@@ -40,10 +40,12 @@ async def on_shutdown(dp):
 
 def main():
     bot = Bot(token=Config.BOT_TOKEN, parse_mode=types.ParseMode.HTML)
-    storage = MongoStorage(host=Config.MONGODB_HOSTNAME,
-                           db_name=f"{Config.MONGODB_DATABASE}_fsm",
-                           password=Config.MONGODB_PASSWORD,
-                           uri=Config.MONGODB_URI)
+    storage = MongoStorage(
+        host=Config.MONGODB_HOSTNAME,
+        db_name=f"{Config.MONGODB_DATABASE}_fsm",
+        password=Config.MONGODB_PASSWORD,
+        uri=Config.MONGODB_URI,
+    )
     dp = Dispatcher(bot, storage=storage)
 
     start_polling(dp, on_startup=on_startup, on_shutdown=on_shutdown)

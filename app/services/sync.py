@@ -1,13 +1,12 @@
 import asyncio
 from collections.abc import Callable
-from functools import wraps, partial
+from functools import partial, wraps
 from typing import Any, TypeVar
 
 Result = TypeVar("Result")
 
 
 def run_sync_decorator(func: Callable[..., Any]):
-
     @wraps(func)
     async def wrapper(*args: Any, **kwargs: Any):
         loop = asyncio.get_event_loop()

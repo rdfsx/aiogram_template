@@ -11,7 +11,9 @@ from app.utils.notifications.new_notify import notify_new_user
 
 class ACLMiddleware(BaseMiddleware):
     @staticmethod
-    async def setup_chat(data: dict, user: types.User, language: str, chat: Optional[types.Chat] = None):
+    async def setup_chat(
+        data: dict, user: types.User, language: str, chat: Optional[types.Chat] = None
+    ):
         user_id = int(user.id)
         chat_id = int(chat.id)
         chat_type = chat.type if chat else "private"
@@ -28,8 +30,14 @@ class ACLMiddleware(BaseMiddleware):
         data["chat"]: ChatModel = chat_db
 
     async def on_pre_process_message(self, message: types.Message, data: dict):
-        await self.setup_chat(data, message.from_user, message.from_user.language_code, message.chat)
+        await self.setup_chat(
+            data, message.from_user, message.from_user.language_code, message.chat
+        )
 
     async def on_pre_process_callback_query(self, query: types.CallbackQuery, data: dict):
-        await self.setup_chat(data, query.from_user, query.from_user.language_code,
-                              query.message.chat if query.message else None)
+        await self.setup_chat(
+            data,
+            query.from_user,
+            query.from_user.language_code,
+            query.message.chat if query.message else None,
+        )

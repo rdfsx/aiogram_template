@@ -6,7 +6,7 @@ from app.utils.db import MyODManticMongo
 
 
 class DatabaseMiddleware(LifetimeControllerMiddleware):
-    skip_patterns = ['update']
+    skip_patterns = ["update"]
 
     def __init__(self):
         super(DatabaseMiddleware, self).__init__()

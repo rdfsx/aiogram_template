@@ -1,6 +1,6 @@
 from aiogram import Dispatcher
 
-from app.handlers.private import default, start, help_
+from app.handlers.private import default, help_, start
 
 
 def setup(dp: Dispatcher):
