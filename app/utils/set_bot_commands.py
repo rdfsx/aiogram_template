@@ -17,7 +17,7 @@ async def set_commands(dp):
                 types.BotCommand("amount", "Количество юзеров в бд"),
                 types.BotCommand("exists_amount", "Количество живых юзеров"),
                 types.BotCommand("broadcast", "Рассылка по всем юзерам"),
-                types.BotCommand("users_file", 'Записать юзеров в файл')
+                types.BotCommand("users_file", "Записать юзеров в файл"),
             ],
-            BotCommandScopeChat(admin)
+            BotCommandScopeChat(admin),
         )

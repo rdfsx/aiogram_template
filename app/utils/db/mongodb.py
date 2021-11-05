@@ -2,7 +2,7 @@ import logging
 from typing import Optional
 
 import pymongo.errors
-from motor.core import AgnosticDatabase, AgnosticCollection, AgnosticClient
+from motor.core import AgnosticClient, AgnosticCollection, AgnosticDatabase
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from odmantic import AIOEngine
 
@@ -29,7 +29,8 @@ class MyMongoClient:
             if "query() got an unexpected keyword argument 'lifetime'" in e.args[0]:
                 logging.warning(
                     "Run `pip install dnspython==1.16.0` in order to fix ConfigurationError. "
-                    "More information: https://github.com/mongodb/mongo-python-driver/pull/423#issuecomment-528998245")
+                    "More information: https://github.com/mongodb/mongo-python-driver/pull/423#issuecomment-528998245"
+                )
             raise e
         return self._mongo
 
@@ -60,5 +61,7 @@ class MyODManticMongo(MyMongoClient):
 
     def get_engine(self) -> AIOEngine:
         if not self._engine:
-            self._engine = MyAIOEngine(motor_client=self.get_client(), database=Config.MONGODB_DATABASE)
+            self._engine = MyAIOEngine(
+                motor_client=self.get_client(), database=Config.MONGODB_DATABASE
+            )
         return self._engine

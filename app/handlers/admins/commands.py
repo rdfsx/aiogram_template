@@ -3,7 +3,7 @@ import logging
 
 import aiofiles.os
 from aiogram import Dispatcher
-from aiogram.types import Message, InputFile
+from aiogram.types import InputFile, Message
 from odmantic import AIOEngine
 
 from app.models import UserModel
@@ -25,15 +25,15 @@ async def get_exists_users(m: Message, db: AIOEngine):
                 count += 1
         except Exception as e:
             logging.exception(e)
-        await asyncio.sleep(.05)
+        await asyncio.sleep(0.05)
     await m.answer(f"Активных пользователей: {count}")
 
 
 async def write_users_to_file(m: Message, db: AIOEngine):
     await m.answer("Начинаем запись...")
     users = await db.find(UserModel)
-    filename = 'users.txt'
-    async with aiofiles.open(filename, mode='w') as f:
+    filename = "users.txt"
+    async with aiofiles.open(filename, mode="w") as f:
         for user in users:
             await f.write(f"{user.id}\n")
     await m.answer_document(InputFile(filename))
