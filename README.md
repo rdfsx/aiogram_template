@@ -1,3 +1,5 @@
+# Attention!!! This repository will no longer be updated. New repository: https://github.com/rdfsx/aiogram-template
+
 ### [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/downloads/)  [![Aiogram](https://img.shields.io/badge/aiogram-2.15-blue)](https://pypi.org/project/aiogram/) 
 
 ### About
